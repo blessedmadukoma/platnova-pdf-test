@@ -1,0 +1,53 @@
+{
+  "balance_summary": {
+    "headers": [
+      "Products",
+      "Opening Balance",
+      "Money out",
+      "Money in",
+      "Closing balance"
+    ],
+    "data": [
+      {
+        "Products": "Account (Current Account)",
+        "Opening Balance": "$2.52",
+        "Money out": "$1,944.09",
+        "Money in": "$1,978.00",
+        "Closing balance": "$36.43"
+      }
+    ]
+  },
+  "transactions": {
+    "headers": ["Date", "Description", "Money out", "Money in", "Balance"],
+    "data": [
+      {
+        "Date": "3 Feb 2023",
+        "Description": "Apple Pay Top-Up by *5453",
+        "Money out": "",
+        "Money in": "$50.00",
+        "Balance": "$52.52"
+      },
+      {
+        "Date": "3 Feb 2023",
+        "Description": "Apple Pay Top-Up by *5453",
+        "Money out": "",
+        "Money in": "$100.00",
+        "Balance": "$152.52"
+      },
+      {
+        "Date": "3 Feb 2023",
+        "Description": "To LINA MILLER SAULGRIEZE",
+        "Money out": "$100.00",
+        "Money in": "",
+        "Balance": "$52.52"
+      },
+      {
+        "Date": "3 Feb 2023",
+        "Description": "To LINA MILLER SAULGRIEZE",
+        "Money out": "$10.00",
+        "Money in": "",
+        "Balance": "$42.52"
+      }
+    ]
+  }
+}
