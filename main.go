@@ -11,6 +11,11 @@ import (
 )
 
 func main() {
+	data, err := readJSONFile("account_statement.json")
+	if err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+
 	// create a portrait, A4 pdf
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -20,20 +25,11 @@ func main() {
 	// add header
 	buildHeading(m)
 
-	// dummy row to force header rendering
-	m.Row(10, func() {
-		m.Col(12, func() {
-			m.Text("This is a test row to ensure header rendering.", props.Text{
-				Top:   3,
-				Style: consts.Normal,
-				Align: consts.Left,
-				Color: getGreyColor(),
-			})
-		})
-	})
+	// add client details
+	buildClientDetails(m, data.ClientInfo)
 
 	// output the file
-	err := m.OutputFileAndClose("account_statement.pdf")
+	err = m.OutputFileAndClose("account_statement.pdf")
 	if err != nil {
 		fmt.Println("could not save pdf:", err)
 		os.Exit(1)
@@ -45,12 +41,12 @@ func main() {
 // build the pdf heading using the logo
 func buildHeading(m pdf.Maroto) {
 	m.RegisterHeader(func() {
-		m.Row(20, func() {
+		m.Row(30, func() {
 			m.Col(2, func() {
 				err := m.FileImage("images/Revolut logo.png", props.Rect{
 					Center:  false,
 					Percent: 75,
-					Top:     0,
+					Top:     2,
 				})
 
 				if err != nil {
@@ -65,10 +61,11 @@ func buildHeading(m pdf.Maroto) {
 					Top:   0,
 					Style: consts.Bold,
 					Align: consts.Right,
+					Size:  14,
 				})
 
 				m.Text("Generated on the 20 May 2023", props.Text{
-					Top:   4.5,
+					Top:   6,
 					Style: consts.Normal,
 					Size:  8,
 
@@ -77,7 +74,7 @@ func buildHeading(m pdf.Maroto) {
 				})
 
 				m.Text("Revolut Bank UAB", props.Text{
-					Top:   8,
+					Top:   10,
 					Style: consts.Normal,
 					Size:  8,
 
@@ -87,5 +84,45 @@ func buildHeading(m pdf.Maroto) {
 			})
 		})
 	})
+}
 
+func buildClientDetails(m pdf.Maroto, clientInfo ClientInfo) {
+	m.Row(25, func() {
+		m.Col(12, func() {
+			m.Text(clientInfo.Name, props.Text{
+				Top:   0,
+				Style: consts.Bold,
+				Align: consts.Left,
+				Size:  12,
+			})
+
+			m.Text(clientInfo.Address.Street, props.Text{
+				Top:   7,
+				Style: consts.Bold,
+				Align: consts.Left,
+				Size:  10,
+			})
+
+			m.Text(clientInfo.Address.City, props.Text{
+				Top:   12,
+				Style: consts.Bold,
+				Align: consts.Left,
+				Size:  10,
+			})
+
+			m.Text(clientInfo.Address.State, props.Text{
+				Top:   17,
+				Style: consts.Bold,
+				Align: consts.Left,
+				Size:  10,
+			})
+
+			m.Text(clientInfo.Address.ZipCode, props.Text{
+				Top:   22,
+				Style: consts.Bold,
+				Align: consts.Left,
+				Size:  10,
+			})
+		})
+	})
 }

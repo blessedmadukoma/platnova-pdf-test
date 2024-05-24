@@ -1,4 +1,30 @@
 {
+  "client_info": {
+    "name": "SANDRA SAULGRIEZE",
+    "address": {
+      "street": "14 The Dale",
+      "city": "Whitefield Hall",
+      "state": "Bettystown",
+      "zip_code": "A92N27C"
+    },
+    "account_info": [
+      {
+        "IBAN": "IE64BOFI90332212345678",
+        "BIC": "REVOIe23",
+        "Note": ""
+      },
+      {
+        "IBAN": "IE64BOFI90332212345678",
+        "BIC": "REVOLT21",
+        "Note": "(You cannot use this IBAN for bank transfers. Please use the IBAN found in the app)"
+      },
+      {
+        "IBAN": "IE64BOFI90332212345678",
+        "BIC": "RETBLT21",
+        "Note": "(You cannot use this IBAN for bank transfers. Please use the IBAN found in the app)"
+      }
+    ]
+  },
   "balance_summary": {
     "headers": [
       "Products",
