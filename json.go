@@ -58,16 +58,13 @@ type Data struct {
 	Transactions   Transactions   `json:"transactions"`
 }
 
-// Function to read JSON file and return the data struct
 func readJSONFile(filename string) (Data, error) {
-	// Open the JSON file
 	jsonFile, err := os.Open(filename)
 	if err != nil {
 		return Data{}, fmt.Errorf("error opening JSON file: %v", err)
 	}
 	defer jsonFile.Close()
 
-	// Read the file contents
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		return Data{}, fmt.Errorf("error reading JSON file: %v", err)

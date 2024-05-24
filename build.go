@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -9,7 +8,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
-// build the pdf heading using the logo
 func buildHeading(m pdf.Maroto) {
 	m.RegisterHeader(func() {
 		m.Row(30, func() {
@@ -177,7 +175,6 @@ func buildBalanceSummary(m pdf.Maroto, balanceSummary BalanceSummary) {
 	})
 
 	headers, contents := getBalanceSummaryTable(balanceSummary)
-	fmt.Println("headers:", headers, "\ncontents:", contents)
 
 	m.TableList(headers, contents, props.TableList{
 		HeaderProp: props.TableListContent{
