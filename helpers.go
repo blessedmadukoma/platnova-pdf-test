@@ -42,3 +42,24 @@ func getBalanceSummaryTable(balanceSummary BalanceSummary) (headers []string, da
 
 	return headers, data
 }
+
+func getTransactionsTable(transactions Transactions) (headers []string, data [][]string) {
+	if len(transactions.Data) == 0 {
+		return nil, nil
+	}
+
+	headers = transactions.Headers
+
+	data = make([][]string, len(transactions.Data))
+	for i, d := range transactions.Data {
+		data[i] = []string{
+			d.Date,
+			d.Description,
+			d.MoneyOut,
+			d.MoneyIn,
+			d.Balance,
+		}
+	}
+
+	return headers, data
+}

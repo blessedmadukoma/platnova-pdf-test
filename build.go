@@ -189,3 +189,32 @@ func buildBalanceSummary(m pdf.Maroto, balanceSummary BalanceSummary) {
 		Line:  true,
 	})
 }
+
+func buildAccountTransactions(m pdf.Maroto, transactions Transactions) {
+	m.Row(20, func() {
+		m.Col(12, func() {
+			m.Text("Account transactions from 1 February 2023 to 29 March 2023", props.Text{
+				Top:  10,
+				Size: 12,
+
+				Style: consts.Bold,
+				Align: consts.Left,
+			})
+		})
+	})
+
+	headers, contents := getTransactionsTable(transactions)
+
+	m.TableList(headers, contents, props.TableList{
+		HeaderProp: props.TableListContent{
+			Size:      9,
+			GridSizes: []uint{3, 3, 2, 2, 2},
+		},
+		ContentProp: props.TableListContent{
+			Size:      8,
+			GridSizes: []uint{3, 3, 2, 2, 2},
+		},
+		Align: consts.Left,
+		Line:  true,
+	})
+}
