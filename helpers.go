@@ -22,3 +22,24 @@ func getAccountInfoTable(accountInfo []AccountInfo) ([][]string, []string) {
 
 	return table, headers
 }
+
+func getBalanceSummaryTable(balanceSummary BalanceSummary) (headers []string, data [][]string) {
+	if len(balanceSummary.Data) == 0 {
+		return nil, nil
+	}
+
+	headers = balanceSummary.Headers
+
+	data = make([][]string, len(balanceSummary.Data))
+	for i, d := range balanceSummary.Data {
+		data[i] = []string{
+			d.Products,
+			d.OpeningBalance,
+			d.MoneyOut,
+			d.MoneyIn,
+			d.ClosingBalance,
+		}
+	}
+
+	return headers, data
+}
