@@ -28,6 +28,9 @@ func main() {
 	// add client details
 	buildClientDetails(m, data.ClientInfo)
 
+	// client account info
+	buildClientAccountInfo(m, data.ClientInfo.AccountInfo)
+
 	// output the file
 	err = m.OutputFileAndClose("account_statement.pdf")
 	if err != nil {
@@ -125,4 +128,69 @@ func buildClientDetails(m pdf.Maroto, clientInfo ClientInfo) {
 			})
 		})
 	})
+}
+
+func buildClientAccountInfo(m pdf.Maroto, accountInfo []AccountInfo) {
+	for _, info := range accountInfo {
+		m.Row(4, func() {
+			m.ColSpace(6)
+			m.Col(6, func() {
+				m.Text("IBAN: ", props.Text{
+					Top:   0,
+					Style: consts.Bold,
+					Align: consts.Left,
+					Size:  9,
+				})
+				m.Text(info.IBAN, props.Text{
+					Top:   0,
+					Left:  15,
+					Style: consts.Normal,
+					Align: consts.Left,
+					Size:  9,
+					Color: getGreyColor(),
+				})
+			})
+		})
+
+		m.Row(4, func() {
+			m.ColSpace(6)
+			m.Col(6, func() {
+				m.Text("BIC: ", props.Text{
+					Top:   0,
+					Style: consts.Bold,
+					Align: consts.Left,
+					Size:  9,
+				})
+				m.Text(info.BIC, props.Text{
+					Top:   0,
+					Left:  15,
+					Style: consts.Normal,
+					Align: consts.Left,
+					Size:  9,
+					Color: getGreyColor(),
+				})
+			})
+		})
+
+		if info.Note != "" {
+			m.Row(4, func() {
+				m.ColSpace(6)
+				m.Col(6, func() {
+					m.Text(info.Note, props.Text{
+						Top:   0,
+						Style: consts.Normal,
+						Left:  15,
+						Align: consts.Left,
+						Size:  8,
+						Color: getGreyColor(),
+					})
+				})
+			})
+		}
+
+		// a blank space between account information
+		m.Row(5, func() {
+			m.ColSpace(12)
+		})
+	}
 }
