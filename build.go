@@ -185,8 +185,9 @@ func buildBalanceSummary(m pdf.Maroto, balanceSummary BalanceSummary) {
 			Size:      8,
 			GridSizes: []uint{3, 3, 2, 2, 2},
 		},
-		Align: consts.Left,
-		Line:  true,
+		Align:                  consts.Left,
+		Line:                   true,
+		VerticalContentPadding: 3,
 	})
 }
 
@@ -214,7 +215,8 @@ func buildAccountTransactions(m pdf.Maroto, transactions Transactions) {
 			Size:      8,
 			GridSizes: []uint{3, 3, 2, 2, 2},
 		},
-		Align: consts.Left,
-		Line:  true,
+		Align:                  consts.Left,
+		Line:                   true,
+		VerticalContentPadding: 3,
 	})
 }
